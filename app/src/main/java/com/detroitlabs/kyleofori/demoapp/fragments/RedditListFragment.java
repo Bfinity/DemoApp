@@ -14,16 +14,16 @@ import android.view.ViewGroup;
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.activities.DemoAppMainActivity;
 import com.detroitlabs.kyleofori.demoapp.adapters.RedditListAdapter;
-import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
 import com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler.RepeatingPostFetchExecutor;
 import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
+import com.detroitlabs.kyleofori.demoapp.parsers.RedditJSONParser.onFragmentListViewUpdated;
 
 import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class RedditListFragment extends ListFragment {
+public class RedditListFragment extends ListFragment implements onFragmentListViewUpdated {
     ArrayList<RedditTextPost> redditPostArrayList;
     RedditListAdapter redditListAdapter;
     RepeatingPostFetchExecutor repeater;
@@ -67,5 +67,10 @@ public class RedditListFragment extends ListFragment {
     private void updatePosts(ArrayList<RedditTextPost> updatedPostsList) {
         redditPostArrayList = updatedPostsList;
         redditListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void redditListUpdated(ArrayList<RedditTextPost> updatedPostItems) {
+        updatePosts(updatedPostItems);
     }
 }

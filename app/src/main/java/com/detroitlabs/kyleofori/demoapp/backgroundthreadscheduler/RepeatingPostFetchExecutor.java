@@ -1,5 +1,6 @@
 package com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler;
 
+import com.detroitlabs.kyleofori.demoapp.parsers.RedditJSONParser;
 import com.detroitlabs.kyleofori.demoapp.tasks.GetRedditPostTask;
 
 import java.util.concurrent.Executors;
@@ -13,6 +14,7 @@ public class RepeatingPostFetchExecutor {
     private ScheduledThreadPoolExecutor scheduledThreadPoolExecutor;
     private String subredditName;
     GetRedditPostTask getRedditPostTask;
+    RedditJSONParser redditJSONParser;
 
     public RepeatingPostFetchExecutor(String subredditName){
         this.subredditName = subredditName;

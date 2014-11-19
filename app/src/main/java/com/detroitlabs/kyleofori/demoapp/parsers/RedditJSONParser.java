@@ -17,6 +17,16 @@ public class RedditJSONParser {
     RedditTextPost redditTextPost;
     ArrayList<RedditTextPost> redditPostArrayList;
     final String LOG_TAG = RedditJSONParser.class.getSimpleName();
+    onFragmentListViewUpdated onFragmentListViewUpdated;
+
+
+    public interface onFragmentListViewUpdated{
+        public void redditListUpdated(ArrayList<RedditTextPost> updatedPostItems);
+    }
+
+    public void setOnFragmentListViewUpdated(onFragmentListViewUpdated onFragmentListViewUpdated){
+        this.onFragmentListViewUpdated = onFragmentListViewUpdated;
+    }
 
     public void convertJSONStringToRedditObject(String JSONString) throws JSONException{
 
@@ -48,6 +58,7 @@ public class RedditJSONParser {
 
             redditPostArrayList.add(redditTextPost);
         }
+        onFragmentListViewUpdated.redditListUpdated(redditPostArrayList);
 
     }
 
